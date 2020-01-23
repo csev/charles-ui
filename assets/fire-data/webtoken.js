@@ -85,6 +85,8 @@ class WebToken {
       this.token = json.data.token;
       this.errors = [ ];
     }
+
+    return this;
   }
 
   async refresh(uri) {
@@ -103,6 +105,8 @@ class WebToken {
       this.token = json.data.token;
       this.errors = [ ];
     }
+
+    return this;
   }
 
   deauthenticate() {
