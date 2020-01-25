@@ -133,16 +133,20 @@ export class Model {
 
   empty() {
     this.parse({
-      id: this.id,
-      type: this.type,
-      attributes: { }
+      data: {
+        id: this.id,
+        type: this._type,
+        attributes: { }
+      }
     });
   }
 
   clear() {
     this.parse({
-      type: this.type,
-      attributes: { }
+      data: {
+        type: this._type,
+        attributes: { }
+      }
     });
   }
 

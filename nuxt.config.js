@@ -19,7 +19,8 @@ export default {
       { src: 'https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js' },
       { src: 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.js' },
       { src: 'https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js' },
-      { src: './jwt-decode.min.js' }
+      { src: './jwt-decode.min.js' },
+      { src: './logentries.min.js' }
     ]
   },
   /*
@@ -61,5 +62,9 @@ export default {
   router: {
     linkActiveClass: "active",
     linkExactActiveClass: "exact"
+  },
+  env: {
+    FireAPI: process.env.FIRE_API,
+    FireLogentriesToken: process.env.FIRE_LOGENTRIES_TOKEN
   }
 }

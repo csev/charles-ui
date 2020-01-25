@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <!--button class="ui basic button" v-if="$store.state.message.list.length" v-on:click="closeAll()"><i class="close icon"></i>Close All</button-->
     <div class="ui message" v-bind:class="message.class" v-for="message in $store.state.message.list">
       <i class="close icon" v-on:click="close(message)"></i>

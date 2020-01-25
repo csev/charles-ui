@@ -1,17 +1,17 @@
 <template>
   <div class="ui container">
     <div class="ui segment">
-      <authentication />
+      <credentials />
     </div>
   </div>
 </template>
 
 <script>
-import authentication from "~/components/authentication.vue";
+import credentials from "~/components/credentials.vue";
 
 export default {
   components: {
-    authentication
+    credentials
   }
 }
 </script>

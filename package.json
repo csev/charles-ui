@@ -11,7 +11,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-promised": "^1.2.2"
   },
   "devDependencies": {
     "node-sass": "^4.13.1",
