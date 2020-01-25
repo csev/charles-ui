@@ -123,6 +123,7 @@ export default {
             timeout: 5
           });
         }
+        delete this.model.attributes.key;
       }
     },
     async deactivate() {

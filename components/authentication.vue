@@ -26,16 +26,6 @@
       <div class="row">
         <div class="ui left icon input" :class="{ error: WebToken.errored }">
           <input
-            type="text"
-            placeholder="Email"
-            v-model="email"
-            @keypress.enter="login">
-          <i class="mail icon"></i>
-        </div>
-      </div>
-      <div class="row">
-        <div class="ui left icon input" :class="{ error: WebToken.errored }">
-          <input
             type="password"
             placeholder="Password"
             v-model="password"
@@ -73,7 +63,6 @@ export default {
     return {
       WebToken,
       username: "",
-      email: "",
       password: "",
       request: null
     };
@@ -84,7 +73,6 @@ export default {
         data: {
           attributes: {
             username: this.username,
-            email: this.email,
             password: this.password
           }
         }
@@ -109,7 +97,6 @@ export default {
           timeout: 5
         });
         this.username = "";
-        this.email = "";
         this.password = "";
       }
     },
