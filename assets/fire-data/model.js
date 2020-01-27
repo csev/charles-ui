@@ -16,6 +16,8 @@ export class Model {
       throw Error('Model missing constructor parameter: type');
     }
 
+    this.socket = null;
+
     this._host = _.trim(options.host, '/');
     this._uri = _.trim(options.uri, '/');
     this._type = _.trim(options.type, '/');
@@ -28,6 +30,44 @@ export class Model {
 
     if(options.attributes) {
       _.assignIn(this.data.attributes, options.attributes);
+    }
+
+    if(options.realtime) {
+      const uri = `ws://${_.replace(this._host, 'http://', '')}/${this._uri}/${this._type}/realtime`;
+
+      this.socket = new WebSocket(uri);
+
+      this.socket.addEventListener("open", (event) => {
+        if(this.id) {
+          this.subscribe();
+        }
+      });
+
+      this.socket.addEventListener("message", async (event) => {
+
+        let json = null;
+
+        try {
+          json = JSON.parse(event.data);
+        } catch {
+          console.error(`Could not parse JSON data: ${event.data}`);
+        }
+
+        switch(json.action) {
+          case "update":
+            if(json.id === this.id) {
+              await this.load();
+            }
+            break;
+          case "delete":
+            console.log('calling clear');
+            if(json.id == this.id) {
+              this.clear();
+            }
+            break;
+        }
+
+      });
     }
   }
 
@@ -61,6 +101,33 @@ export class Model {
     return this.errors.length;
   }
 
+  subscribe(socket=null) {
+    socket = socket || this.socket;
+
+    if(!socket) {
+      throw Error("No socket available. Make the model realtime or provide a socket.");
+    }
+
+    socket.send(JSON.stringify({
+      "action": "subscribe",
+      "id": this.id
+    }));
+  }
+
+
+  unsubscribe(socket=null) {
+    socket = socket || this.socket;
+
+    if(!socket) {
+      throw Error("No socket available. Make the model realtime or provide a socket.");
+    }
+
+    socket.send(JSON.stringify({
+      "action": "unsubscribe",
+      "id": this.id
+    }));
+  }
+
   parse(json) {
     this.errors = [ ];
 
@@ -77,7 +144,7 @@ export class Model {
 
   async load(options) {
     if(!this.id) {
-      console.error("sugar-data: Tried to load a model without an ID.");
+      console.error("fire-data: Tried to load a model without an ID.");
       return this;
     }
 
@@ -118,7 +185,7 @@ export class Model {
 
   async delete() {
     if(!this.id) {
-      console.error("sugar-data: Tried to delete a module without an ID.");
+      console.error("fire-data: Tried to delete a module without an ID.");
       return this;
     }
 
@@ -126,7 +193,7 @@ export class Model {
       method: 'DELETE'
     });
 
-    this.parse(json)
+    this.clear();
 
     return this;
   }
@@ -135,16 +202,20 @@ export class Model {
     this.parse({
       data: {
         id: this.id,
-        type: this._type,
+        type: this.type,
         attributes: { }
       }
     });
   }
 
   clear() {
+    if(this.socket) {
+      this.unsubscribe();
+    }
+
     this.parse({
       data: {
-        type: this._type,
+        type: this.type,
         attributes: { }
       }
     });

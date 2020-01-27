@@ -2,7 +2,7 @@
   <div>
     <div class="ui container">
       <div class="ui menu">
-        <div class="header item"><i class="fire layout icon"></i>Fire Ui</div>
+        <div class="header item"><i class="fire layout icon"></i>Fire UI</div>
         <div class="right menu">
           <nuxt-link class="item" :to="{ name: 'join' }" v-if="!WebToken.authenticated"><i class="users layout icon"></i>Join</nuxt-link>
           <nuxt-link class="item" :to="{ name: 'login' }" v-if="!WebToken.authenticated"><i class="shield layout icon"></i>Login</nuxt-link>
@@ -50,19 +50,9 @@
 </template>
 
 <script>
-import Vue from "vue";
-
-import message from "~/components/message.vue";
-import { FIRE_LOGENTRIES_TOKEN } from "~/assets/settings.js";
 import WebToken from "~/assets/fire-data/webtoken.js";
 
-LE.init({
-  token: FIRE_LOGENTRIES_TOKEN,
-  page_info: 'per-entry',
-  trace: true,
-  print: true,
-  catchall: true
-});
+import message from "~/components/message.vue";
 
 export default {
   data() {
@@ -72,7 +62,7 @@ export default {
   },
   watch: {
     "WebToken.authenticated": function() {
-      Vue.nextTick(function() {
+      this.$nextTick(function() {
         $("#dropdown-shopping").dropdown();
       });
     }
