@@ -1,4 +1,4 @@
-# sugar-ui
+# charles-ui
 
 > My marvelous Nuxt.js project
 
