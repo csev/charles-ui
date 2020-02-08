@@ -2,21 +2,21 @@
   <div>
     <div class="ui container">
       <div class="ui menu fixed">
-        <div class="header item"><i class="fire layout icon"></i>Sugar UI</div>
+        <div class="header item"><i class="fire layout icon"></i>Charles UI</div>
         <div class="right menu">
-          <div class="item">
+          <!--div class="item">
             <div class="ui icon input">
               <input type="text" placeholder="Search..." @keypress.enter="search" v-model="searchTerm">
               <i class="search link icon" @click="search"></i>
             </div>
-          </div>
-          <div id="dropdown-shopping" class="ui pointing dropdown link item" v-if="WebToken.authenticated">
+          </div-->
+          <!--div id="dropdown-menu" class="ui pointing dropdown link item" v-if="WebToken.authenticated">
             <span class="text"><i class="user layout icon"></i>Menu</span>
             <i class="dropdown icon"></i>
             <div class="menu">
               <nuxt-link class="item" :to="{ name: 'account' }"><i class="user layout icon"></i>Account</nuxt-link>
               <nuxt-link class="item" :to="{ name: 'discussion' }"><i class="chat layout icon"></i>Discussion</nuxt-link>
-              <!--div class="header">Categories</div>
+              <div class="header">Categories</div>
               <div class="item">
                 <i class="dropdown icon"></i>
                 <span class="text">Clothing</span>
@@ -38,10 +38,9 @@
               <div class="divider"></div>
               <div class="header">Order</div>
               <div class="item">Status</div>
-              <div class="item">Cancellations</div-->
+              <div class="item">Cancellations</div>
             </div>
-          </div>
-          <nuxt-link class="item" :to="{ name: 'join' }" v-if="!WebToken.authenticated"><i class="users layout icon"></i>Join</nuxt-link>
+          </div-->
           <nuxt-link class="item" :to="{ name: 'login' }" v-if="!WebToken.authenticated"><i class="shield layout icon"></i>Login</nuxt-link>
           <nuxt-link class="item" :to="{ name: 'logout' }" v-if="WebToken.authenticated"><i class="shield layout icon"></i>Logout</nuxt-link>
         </div>
@@ -72,12 +71,12 @@ export default {
   watch: {
     "WebToken.authenticated": function() {
       this.$nextTick(function() {
-        $("#dropdown-shopping").dropdown();
+        $("#dropdown-menu").dropdown();
       });
     }
   },
   mounted() {
-    $("#dropdown-shopping").dropdown();
+    $("#dropdown-menu").dropdown();
   },
   components: {
     message
