@@ -1,4 +1,4 @@
-# fire-ui
+# sugar-ui
 
 > My marvelous Nuxt.js project
 

@@ -1,6 +1,6 @@
 import { jsonapi } from './request.js';
 
-let content_type = 'application/vnd.api+json'
+let content_type = 'application/vnd.api+json';
 
 class WebToken {
 

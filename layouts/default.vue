@@ -1,17 +1,21 @@
 <template>
   <div>
     <div class="ui container">
-      <div class="ui menu">
-        <div class="header item"><i class="fire layout icon"></i>Fire UI</div>
+      <div class="ui menu fixed">
+        <div class="header item"><i class="fire layout icon"></i>Sugar UI</div>
         <div class="right menu">
-          <nuxt-link class="item" :to="{ name: 'join' }" v-if="!WebToken.authenticated"><i class="users layout icon"></i>Join</nuxt-link>
-          <nuxt-link class="item" :to="{ name: 'login' }" v-if="!WebToken.authenticated"><i class="shield layout icon"></i>Login</nuxt-link>
-          <nuxt-link class="item" :to="{ name: 'logout' }" v-if="WebToken.authenticated"><i class="shield layout icon"></i>Logout</nuxt-link>
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search..." @keypress.enter="search" v-model="searchTerm">
+              <i class="search link icon" @click="search"></i>
+            </div>
+          </div>
           <div id="dropdown-shopping" class="ui pointing dropdown link item" v-if="WebToken.authenticated">
             <span class="text"><i class="user layout icon"></i>Menu</span>
             <i class="dropdown icon"></i>
             <div class="menu">
               <nuxt-link class="item" :to="{ name: 'account' }"><i class="user layout icon"></i>Account</nuxt-link>
+              <nuxt-link class="item" :to="{ name: 'discussion' }"><i class="chat layout icon"></i>Discussion</nuxt-link>
               <!--div class="header">Categories</div>
               <div class="item">
                 <i class="dropdown icon"></i>
@@ -37,9 +41,13 @@
               <div class="item">Cancellations</div-->
             </div>
           </div>
+          <nuxt-link class="item" :to="{ name: 'join' }" v-if="!WebToken.authenticated"><i class="users layout icon"></i>Join</nuxt-link>
+          <nuxt-link class="item" :to="{ name: 'login' }" v-if="!WebToken.authenticated"><i class="shield layout icon"></i>Login</nuxt-link>
+          <nuxt-link class="item" :to="{ name: 'logout' }" v-if="WebToken.authenticated"><i class="shield layout icon"></i>Logout</nuxt-link>
         </div>
       </div>
     </div>
+    <div class="spacer"></div>
     <div class="ui container">
       <message id="messages" class="row" />
     </div>
@@ -50,14 +58,15 @@
 </template>
 
 <script>
-import WebToken from "~/assets/fire-data/webtoken.js";
+import WebToken from "~/assets/sugar-data/webtoken.js";
 
 import message from "~/components/message.vue";
 
 export default {
   data() {
     return {
-      WebToken
+      WebToken,
+      searchTerm: "",
     };
   },
   watch: {
@@ -72,6 +81,11 @@ export default {
   },
   components: {
     message
+  },
+  methods: {
+    async search() {
+      this.$router.push(`/search/${this.searchTerm}`)
+    }
   }
 }
 </script>
@@ -84,5 +98,9 @@ export default {
 
   #messages {
     margin: 13px 0px 13px 0px;
+  }
+
+  .spacer {
+    height: 50px;
   }
 </style>

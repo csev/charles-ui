@@ -15,7 +15,7 @@
 <script>
 import { HOST } from "~/assets/settings.js";
 
-import WebToken from "~/assets/fire-data/webtoken.js";
+import WebToken from "~/assets/sugar-data/webtoken.js";
 
 import authentication from "~/components/authentication.vue";
 import activation from "~/components/activation.vue";

@@ -50,8 +50,8 @@
 
 <script>
 import { FIRE_API } from "~/assets/settings.js";
-import WebToken from "~/assets/fire-data/webtoken.js";
-import { Model } from "~/assets/fire-data/model.js";
+import WebToken from "~/assets/sugar-data/webtoken.js";
+import { Model } from "~/assets/sugar-data/model.js";
 
 export default {
   data() {

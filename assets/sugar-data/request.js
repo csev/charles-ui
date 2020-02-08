@@ -39,4 +39,5 @@ export async function jsonapi(uri, options) {
   let response = await fetch(uri, options);
 
   return await response.json();
+
 }

@@ -50,7 +50,7 @@ export class Model {
         try {
           json = JSON.parse(event.data);
         } catch {
-          console.error(`Could not parse JSON data: ${event.data}`);
+          throw Error(`Could not parse JSON data: ${event.data}`);
         }
 
         switch(json.action) {
@@ -110,7 +110,7 @@ export class Model {
 
     socket.send(JSON.stringify({
       "action": "subscribe",
-      "id": this.id
+      "path": `/${this._uri}/${this._type}/${this.id}`
     }));
   }
 
@@ -124,7 +124,7 @@ export class Model {
 
     socket.send(JSON.stringify({
       "action": "unsubscribe",
-      "id": this.id
+      "path": `/${this._uri}/${this._type}/${this.id}`
     }));
   }
 
@@ -133,13 +133,13 @@ export class Model {
 
     if(json.errors) {
       this.errors = json.errors;
-    } else {
-      this.data = json.data || {
-        id: null,
-        type: this._type,
-        attributes: { }
-      };
     }
+
+    this.data = json.data || {
+      id: null,
+      type: this._type,
+      attributes: { }
+    };
   }
 
   async load(options) {

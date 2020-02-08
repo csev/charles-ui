@@ -1,5 +1,5 @@
 import { FIRE_API } from "~/assets/settings.js";
-import WebToken from "~/assets/fire-data/webtoken.js";
+import WebToken from "~/assets/sugar-data/webtoken.js";
 
 setInterval(async () => {
     if(WebToken.authenticated) {

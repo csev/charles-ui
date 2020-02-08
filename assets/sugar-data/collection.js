@@ -39,13 +39,20 @@ export class Collection {
 
       this.socket.addEventListener("message", async (event) => {
 
+        let json = null;
+
         try {
-          const json = JSON.parse(event.data);
+          json = JSON.parse(event.data);
         } catch {
-          console.error(`Could not parse JSON data: ${event.data}`);
+          throw Error(`Could not parse JSON data: ${event.data}`);
         }
 
         switch(json.action) {
+          case "create":
+            if(this.inclusive) {
+              this.add_by_id(json.id);
+            }
+            break;
           case "update":
             if(json.id in this.index) {
               await this.index[json.id].load();
@@ -75,6 +82,60 @@ export class Collection {
     return this.errors.length;
   }
 
+  add(model) {
+    this.index[model.id] = model;
+    this.models.push(model);
+
+    if(this.socket) {
+      model.subscribe(this.socket);
+    }
+  }
+
+  remove(model) {
+    if(this.socket) {
+      model.unsubscribe(this.socket);
+    }
+
+    delete this.index[model.id];
+
+    this.models = _.reject(this.models, function(_model) {
+      return model.id == _model.id;
+    });
+  }
+
+  async add_by_id(id) {
+    if(!id) {
+      throw Error('Collection.add_by_id: No ID provided.')
+    }
+
+    const model = new Model({
+      host: this._host,
+      uri: this.uri,
+      type: this._type,
+      id: id
+    });
+
+    await this.model.load();
+
+    this.add(model);
+
+    return this.index[id];
+  }
+
+  async remove_by_id(id) {
+    if(!id) {
+      throw Error('Collection.remove_by_id: No ID provided.')
+    }
+
+    if(!(id in this.index)) {
+      throw Error('Collection.remove_by_id: ID not found in index.')
+    }
+
+    model = this.index[id];
+
+    this.remove(model);
+  }
+
   parse(json) {
     for(let model of this.models) {
       if(this.socket) {
@@ -83,39 +144,37 @@ export class Collection {
     }
 
     this.errors = [ ];
+    this.index = { };
+    this.models = [ ];
+    this.offset = 0;
+    this.limit = 0;
+    this.total = 0;
 
     if(json.errors) {
+
       this.errors = json.errors;
-    } else {
-      this.index = { };
-      this.models = [ ];
-      this.offset = 0;
-      this.limit = 0;
-      this.total = 0;
 
-      _.forEach(json.data, (item) => {
-        let model = new Model({
-          host: this._host,
-          type: this._type,
-          uri: this._uri,
-          id: item.id,
-          attributes: item.attributes
-        });
+    }
 
-        this.index[model.id] = model;
-        this.models.push(model);
-
-        if(this.socket) {
-          model.subscribe(this.socket);
-        }
+    _.forEach(json.data, (item) => {
+      let model = new Model({
+        host: this._host,
+        type: this._type,
+        uri: this._uri,
+        id: item.id,
+        attributes: item.attributes
       });
 
-      if(json.meta) {
-        this.offset = json.meta.offset;
-        this.limit = json.meta.limit;
-        this.total = json.meta.total;
-      }
+      this.add(model);
+
+    });
+
+    if(json.meta) {
+      this.offset = json.meta.offset;
+      this.limit = json.meta.limit;
+      this.total = json.meta.total;
     }
+
   }
 
   async find(options) {

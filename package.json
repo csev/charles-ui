@@ -1,5 +1,5 @@
 {
-  "name": "fire-ui",
+  "name": "sugar-ui",
   "version": "1.0.0",
   "description": "My marvelous Nuxt.js project",
   "author": "Paul Severance",
@@ -13,7 +13,8 @@
   "dependencies": {
     "@timberio/browser": "^0.35.0",
     "nuxt": "^2.0.0",
-    "vue-promised": "^1.2.2"
+    "vue-promised": "^1.2.2",
+    "vue-text-highlight": "^2.0.10"
   },
   "devDependencies": {
     "node-sass": "^4.13.1",
