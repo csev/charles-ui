@@ -1,12 +1,12 @@
 import { Timber } from "@timberio/browser";
 
-export const FIRE_API = process.env.FireAPI || "http://localhost:8001";
+export const SUGAR_API = process.env.SugarAPI || "http://localhost:8001";
 
-const FIRE_TIMBER_SOURCE_ID = process.env.FireTimberSourceID;
-const FIRE_TIMBER_API_KEY = process.env.FireTimberAPIKey;
+const SUGAR_TIMBER_SOURCE_ID = process.env.SugarTimberSourceID;
+const SUGAR_TIMBER_API_KEY = process.env.SugarTimberAPIKey;
 
 export let logger = null;
 
-if(FIRE_TIMBER_API_KEY && FIRE_TIMBER_SOURCE_ID) {
-  logger = new Timber(FIRE_TIMBER_API_KEY, FIRE_TIMBER_SOURCE_ID)
+if(SUGAR_TIMBER_API_KEY && SUGAR_TIMBER_SOURCE_ID) {
+  logger = new Timber(SUGAR_TIMBER_API_KEY, SUGAR_TIMBER_SOURCE_ID)
 }

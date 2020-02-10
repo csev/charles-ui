@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { FIRE_API } from "~/assets/settings.js";
+import { SUGAR_API } from "~/assets/settings.js";
 import WebToken from "~/assets/sugar-data/webtoken.js";
 
 export default {
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     async login() {
-      this.request = WebToken.authenticate(`${FIRE_API}/v1/authentication`, {
+      this.request = WebToken.authenticate(`${SUGAR_API}/v1/authentication`, {
         data: {
           attributes: {
             username: this.username,
