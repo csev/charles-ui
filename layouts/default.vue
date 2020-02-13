@@ -8,7 +8,9 @@
             <span class="text"><i class="user layout icon"></i>Menu</span>
             <i class="dropdown icon"></i>
             <div class="menu">
-              <nuxt-link class="item" :to="{ name: 'manage' }"><i class="user layout icon"></i>Manage</nuxt-link>
+              <nuxt-link class="item" :to="{ name: 'manage' }"><i class="list layout icon"></i>Manage</nuxt-link>
+              <nuxt-link class="item" :to="{ name: 'create' }"><i class="asterisk layout icon"></i>Create</nuxt-link>
+              <nuxt-link class="item" :to="{ name: 'search' }"><i class="search layout icon"></i>Search</nuxt-link>
             </div>
           </div>
           <nuxt-link class="item" :to="{ name: 'login' }" v-if="!WebToken.authenticated"><i class="shield layout icon"></i>Login</nuxt-link>

@@ -9,7 +9,7 @@
           <i class="circular shield icon"></i>
           <div class="content">
             Login
-            <div class="sub header">Login with a <b>username</b>, <b>email</b> and <b>password</b>.</div>
+            <div class="sub header">Login with a <b>username</b> and <b>password</b>.</div>
           </div>
         </h2>
       </div>

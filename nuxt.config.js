@@ -13,13 +13,15 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.css'}
+      { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.css'},
+      { rel: 'stylesheet', type: 'text/css', href: 'https://unpkg.com/jsoneditor@8.5.3/dist/jsoneditor.css' }
     ],
     script: [
       { src: 'https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js' },
       { src: 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.js' },
       { src: 'https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js' },
-      { src: './jwt-decode.min.js' }
+      { src: 'https://unpkg.com/jsoneditor@8.5.3/dist/jsoneditor.js' },
+      { src: '/jwt-decode.min.js' }
     ]
   },
   /*
