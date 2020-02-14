@@ -68,9 +68,9 @@ export default {
     linkExactActiveClass: "exact"
   },
   env: {
-    FireAPI: process.env.SUGAR_API,
-    FireTimberSourceID: process.env.SUGAR_TIMBER_SOURCE_ID,
-    FireTimberAPIKey: process.env.SUGAR_TIMBER_API_KEY
+    SugarAPI: process.env.SUGAR_API,
+    SugarTimberSourceID: process.env.SUGAR_TIMBER_SOURCE_ID,
+    SugarTimberAPIKey: process.env.SUGAR_TIMBER_API_KEY
   },
   server: {
     host: "0.0.0.0",
