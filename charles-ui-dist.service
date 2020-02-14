@@ -1,0 +1,15 @@
+[Unit]
+Description=Elasticsearch UI
+
+[Service]
+Environment=SUGAR_API=<sugar api host>
+
+User=ubuntu
+Group=ubuntu
+
+WorkingDirectory=<path to git repo>
+
+ExecStart=/usr/bin/npm run start
+
+[Install]
+WantedBy=multi-user.target
