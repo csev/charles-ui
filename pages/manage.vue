@@ -117,7 +117,10 @@ export default {
         index: WebToken.payload.data.id,
         body: { query }
       });
-      this.records = (await this.request).hits.hits;
+      let json = await this.request;
+      if(json.hits && json.hits.hits) {
+        this.records = json.hits.hits;
+      }
     },
     async getRecordCount() {
       this.request = elasticsearch('_count', {
