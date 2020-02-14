@@ -71,5 +71,9 @@ export default {
     FireAPI: process.env.SUGAR_API,
     FireTimberSourceID: process.env.SUGAR_TIMBER_SOURCE_ID,
     FireTimberAPIKey: process.env.SUGAR_TIMBER_API_KEY
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 8000
   }
 }
