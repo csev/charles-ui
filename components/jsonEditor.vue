@@ -4,10 +4,20 @@
 
 <script>
 export default {
-  props: ["value"],
+  props: {
+    value: Object,
+    mode: {
+      type: String,
+      default: "code"
+    },
+    live:{
+      type: Boolean,
+      default: false
+    }
+  },
   mounted() {
     this.editor = new JSONEditor(this.$el, {
-      mode: "code",
+      mode: this.mode,
       onChangeText: (text) => {
         let json = null;
 
@@ -23,6 +33,13 @@ export default {
       }
     });
     this.editor.set(this.value);
+  },
+  watch: {
+    value: function(value) {
+      if(this.live) {
+        this.editor.set(this.value);
+      }
+    }
   }
 }
 </script>
