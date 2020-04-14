@@ -2,7 +2,8 @@
 Description=Elasticsearch UI
 
 [Service]
-Environment=SUGAR_API=<sugar api host>
+# Environment=SUGAR_API=https://some.host
+Environment=SUGAR_API=<charles api host>
 
 User=ubuntu
 Group=ubuntu
